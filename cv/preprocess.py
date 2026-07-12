@@ -1,4 +1,5 @@
 import cv2
+import numpy as np
 
 
 def preprocess(image_path):
@@ -28,6 +29,15 @@ def preprocess(image_path):
         cv2.THRESH_BINARY_INV,
         11,
         2
+    )
+
+    # Close small gaps and remove tiny holes
+    kernel = np.ones((3, 3), np.uint8)
+
+    thresh = cv2.morphologyEx(
+        thresh,
+        cv2.MORPH_CLOSE,
+        kernel
     )
 
     return thresh

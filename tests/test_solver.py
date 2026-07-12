@@ -60,7 +60,6 @@ def test_already_solved_board():
         print("Already solved board test failed")
 
 
-# Run all tests
 test_valid_puzzle()
 test_unsolvable_puzzle()
 test_already_solved_board()

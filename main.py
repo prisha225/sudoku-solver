@@ -1,24 +1,21 @@
-from solver.board import print_board
+from cv.grid import extract_grid
+from cv.cells import extract_cells
+from cv.ocr import read_board
+
 from solver.solve import solve
+from solver.board import print_board
 
-board = [
-    [5, 3, 0, 0, 7, 0, 0, 0, 0],
-    [6, 0, 0, 1, 9, 5, 0, 0, 0],
-    [0, 9, 8, 0, 0, 0, 0, 6, 0],
-    [8, 0, 0, 0, 6, 0, 0, 0, 3],
-    [4, 0, 0, 8, 0, 3, 0, 0, 1],
-    [7, 0, 0, 0, 2, 0, 0, 0, 6],
-    [0, 6, 0, 0, 0, 0, 2, 8, 0],
-    [0, 0, 0, 4, 1, 9, 0, 0, 5],
-    [0, 0, 0, 0, 8, 0, 0, 7, 9]
-]
+image_path = "images/puzzle.png"
 
-print("Original Board:\n")
+warped = extract_grid(image_path)
+cells = extract_cells(warped)
+board = read_board(cells)
+
+print("Detected Puzzle:")
 print_board(board)
 
 if solve(board):
-    print("\nSolved Board:\n")
+    print("\nSolved Puzzle:")
     print_board(board)
-
 else:
-    print("No solution")
+    print("No solution exists.")
